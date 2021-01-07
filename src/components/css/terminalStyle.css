@@ -32,8 +32,8 @@
 }
 
 .close-button {
-    font-size: 10px;
-    transition: 0.3s;
+    font-size: 11px;
+    transition: 0.1s;
     color: rgba(0, 0, 0, 0);;
     background-color: #FF3D49;
 
@@ -54,20 +54,3 @@
 .close-button:hover {
     color: rgba(0, 0, 0, 0.7);;
 }
-
-.text-area {
-    flex: 1 1 auto;
-    padding: 2px;
-    background-color: #1C1C1C;
-    color: #ffffff;
-    word-wrap: normal;
-
-}
-
-.unselectable {
-    -moz-user-select: text;
-    -khtml-user-select: text;
-    -webkit-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
-   }

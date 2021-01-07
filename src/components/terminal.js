@@ -6,6 +6,9 @@ import Draggable from "react-draggable";
 // Css
 import Style from "./css/terminalStyle.css";
 
+// Components
+import TerminalInputOutput from "./teminalInputOutput"
+
 class Terminal extends React.Component {
   state = {
     date: new Date(),
@@ -21,16 +24,7 @@ class Terminal extends React.Component {
 
   render() {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
-    var monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const newDate = new Date()
-    const date = newDate.getDate();
-    const month = newDate.getMonth();
-    const hour = newDate.getHours();
-    const minute = newDate.getMinutes();
-    const seconds = newDate.getSeconds();
-
-
-    return (
+     return (
       <Draggable handle="strong" bounds="body" {...dragHandlers}>
         <div className="box no-cursor container resize">
           <strong className="cursor">
@@ -39,9 +33,7 @@ class Terminal extends React.Component {
               <div className="close-button unselectable">X</div>
             </div>
           </strong>
-          <div className="text-area">
-              Last login: {date} {monthsArray[month]} {hour}:{minute}:{seconds} on ttys000
-          </div>
+          <TerminalInputOutput/>
         </div>
       </Draggable>
     );

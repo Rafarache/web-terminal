@@ -1,0 +1,30 @@
+
+.text-area {
+    flex: 1 1 auto;
+    padding: 2px;
+    background-color: #1C1C1C;
+    color: #ffffff;
+    word-wrap: normal;
+
+}
+
+.line_input {
+    display:inline-block;
+    width: 100%;
+}
+
+.input {
+    background: none;
+    border: none;
+    padding: 0px;
+    outline: none;
+    color: white;
+    font-family: monospace;
+    width: 100%;
+}
+
+.input :focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
