@@ -7,13 +7,14 @@ import Draggable from "react-draggable";
 import Style from "./css/terminalInputOutputStyle.css";
 
 const enter = 13
-const preInput = "user@my-pc % "
+const preInput = "user@my-pc"
 
 class Input extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-          text : preInput,
+          text : preInput + " " + props.dirName + " % ",
+          limit : preInput + " " + props.dirName + " %",
           enterPressed : false
         }
 
@@ -22,6 +23,7 @@ class Input extends React.Component {
       this.escFunction = this.escFunction.bind(this);
       this.handleText = this.handleText.bind(this)
     }
+
     escFunction(event){
       if(event.keyCode === enter && !this.state.enterPressed) {
         this.setState({enterPressed : true})
@@ -30,19 +32,21 @@ class Input extends React.Component {
         this.props.appendCommand(newCommand)
       }
     }
+    
     componentDidMount(){
       document.addEventListener("keydown", this.escFunction, false);
       this.inpuputFullNameRef.current.focus()
     }
+    
     componentWillUnmount(){
       document.removeEventListener("keydown", this.escFunction, false);
     }
 
     handleText(e) {
-        if(e.target.value !== "user@my-pc %"){
+        if(e.target.value !== this.state.limit){
             this.setState({text: e.target.value});
         } else {
-            this.setState({text: preInput});
+            this.setState({text: this.state.text});
         }
     }
 

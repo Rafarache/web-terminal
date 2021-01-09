@@ -6,33 +6,86 @@ import Draggable from "react-draggable";
 // Css
 import Style from "./css/terminalInputOutputStyle.css";
 
+// Classes
+import File from "../classes/file"
+
 // Componets
 import Input from "./input"
 
+// Scripts
+import commandOutput from "../scripts/outputHandler";
+import decodeCommand from "../scripts/decodeCommand"
 
 class TerminalInputOutput extends React.Component {
     
     handleAppendCommand = (command) => {
-        // Constants
+        // Output
+        var output = this.handleCommand(command)
         var newArray = this.state.responses
-        newArray.push(<div>{command}</div>)
-
+        newArray.push(<div>{output}</div>)
         this.setState({responses : newArray})
         
         this.pushInput()
     }
+
+    changeCurrentDir = (newDirName) => {
+        var newDir = this.state.currentFile.content.find(dir => dir.name === newDirName)
+        if(newDir !== undefined) {
+            console.log(newDir)
+            this.setState({currentFile : newDir})
+        }
+    }
+
+    moveToLocation = (newDir) => {
+        this.setState({currentFile : newDir})
+    }
+
+    isDir = (fileName) => {
+        var dir = this.state.currentFile.content.find(dir => dir.name === fileName)
+        if(dir  === undefined) {
+            return false
+        } else if (dir.type === ".dir") {
+            return true
+        }
+        return false
+    }
+
+    handleCommand = (command) => {
+        var decodedCommand = decodeCommand(command)
+        var instruction = decodedCommand[0]
+        if(instruction === "cd") {
+            var argument = decodedCommand[1]
+            if (argument === "..") {
+                this.moveToLocation(this.state.currentFile.location)
+            } else if (this.isDir(argument)) {
+                // Do noting
+            } else {
+                this.changeCurrentDir(argument)
+            }
+        }
+        var currentFile =this.state.currentFile
+        return commandOutput(command, currentFile)
+    }
     
     pushInput = () => {
         var newArray = this.state.responses
-        newArray.push(<Input appendCommand={this.handleAppendCommand}/>)
+        newArray.push(<Input appendCommand={this.handleAppendCommand} dirName={this.state.currentFile.name}/>)
         
-        console.log(newArray)
         this.setState({responses : newArray})
+    }
+
+    componentDidMount = () => {
+        var root = this.state.currentFile
+        root.content.push(
+            new File("Portifolio",".dir",[],root),
+            new File("Sobre",".exe","",root)
+        )
+        this.setState({currentFile : root})
     }
     
     state = {
-      responses : [<Input appendCommand={this.handleAppendCommand}/>],
-      status : true
+      responses : [<Input appendCommand={this.handleAppendCommand} dirName={"root"} />],
+      currentFile : new File("root",".dir",[],"root")
     };
 
   render(){
