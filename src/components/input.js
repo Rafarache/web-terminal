@@ -1,10 +1,8 @@
 // Imports
-import React, { Component, useState, createClass } from "react";
-import ReactDOM from "react-dom";
-import Draggable from "react-draggable";
+import React from "react";
 
 // Css
-import Style from "./css/terminalInputOutputStyle.css";
+import "./css/terminalInputOutputStyle.css";
 
 const enter = 13
 const preInput = "user@my-pc"

@@ -23,7 +23,27 @@ function getDirFiles(dir) {
     }
 }
 
-export default function commandOutput(command, file) {
+function isFileInDir (fileName,dir) {
+    var newDir = dir.content.find(dir => dir.name === fileName)
+    console.log(newDir,dir)
+    if(newDir  === undefined) {
+        return false
+    } else if (newDir.type === ".dir") {
+        return true
+    }
+    return false
+}
+
+function getFileInDirContent (fileName,dir) {
+    var newDir = dir.content.find(dir => dir.name === fileName)
+    if(dir  === undefined) {
+        return null
+    } else {
+        return newDir
+    }
+}
+
+export default function commandOutput(command, file, setCurrentFile) {
     var decodedCommand = decodeCommand(command)
     var instruction = decodedCommand[0]
     var output = ""
@@ -31,17 +51,44 @@ export default function commandOutput(command, file) {
     if (isExecutable(instruction)) {
         return output
     } else {
+        var argument = decodedCommand[1]
         switch (instruction) {
+
             case 'ls':
+                    // Table of files
                     output = <div className="output">{getDirFiles(file)}</div>
                 break
+
             case 'cd':
+                // Has not typed dir name
                 if (decodedCommand.length === 1) {
-                    output = "No name typed"
+                    output = "No directory name typed"
+
+                // Go back one dir
+                } else if (argument === "..") {
+                    if(file.location !== "root") {
+                        setCurrentFile(file.location)
+                        output = ""
+                    } else {
+                        output = "Already in root directory"
+                    }
+
+                // Enter dir
                 } else {
-                    output = ""
+                    // Is an Dir
+                    if(isFileInDir(argument,file)) {
+                        setCurrentFile(getFileInDirContent(argument,file))
+                    // Not an dir, so cannot enter
+                    } else {
+                        output = "Cannot enter file which is not directory"
+                    }
                 }
                 break
+
+            case '':
+                output = ""
+                break
+            
             default:
                 output = "Command not found"
                 break

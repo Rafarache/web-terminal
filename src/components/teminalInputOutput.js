@@ -1,10 +1,8 @@
 // Imports
-import React, { Component, useState } from "react";
-import ReactDOM from "react-dom";
-import Draggable from "react-draggable";
+import React from "react";
 
 // Css
-import Style from "./css/terminalInputOutputStyle.css";
+import "./css/terminalInputOutputStyle.css";
 
 // Classes
 import File from "../classes/file"
@@ -14,7 +12,6 @@ import Input from "./input"
 
 // Scripts
 import commandOutput from "../scripts/outputHandler";
-import decodeCommand from "../scripts/decodeCommand"
 
 class TerminalInputOutput extends React.Component {
     
@@ -28,43 +25,13 @@ class TerminalInputOutput extends React.Component {
         this.pushInput()
     }
 
-    changeCurrentDir = (newDirName) => {
-        var newDir = this.state.currentFile.content.find(dir => dir.name === newDirName)
-        if(newDir !== undefined) {
-            console.log(newDir)
-            this.setState({currentFile : newDir})
-        }
-    }
-
-    moveToLocation = (newDir) => {
-        this.setState({currentFile : newDir})
-    }
-
-    isDir = (fileName) => {
-        var dir = this.state.currentFile.content.find(dir => dir.name === fileName)
-        if(dir  === undefined) {
-            return false
-        } else if (dir.type === ".dir") {
-            return true
-        }
-        return false
+    setCurrentFile = (file) => {
+        this.setState({currentFile : file})
     }
 
     handleCommand = (command) => {
-        var decodedCommand = decodeCommand(command)
-        var instruction = decodedCommand[0]
-        if(instruction === "cd") {
-            var argument = decodedCommand[1]
-            if (argument === "..") {
-                this.moveToLocation(this.state.currentFile.location)
-            } else if (this.isDir(argument)) {
-                // Do noting
-            } else {
-                this.changeCurrentDir(argument)
-            }
-        }
-        var currentFile =this.state.currentFile
-        return commandOutput(command, currentFile)
+        var currentFile = this.state.currentFile
+        return commandOutput(command, currentFile, this.setCurrentFile)
     }
     
     pushInput = () => {

@@ -1,10 +1,9 @@
 // Imports
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import Draggable from "react-draggable";
 
 // Css
-import Style from "./css/terminalStyle.css";
+import "./css/terminalStyle.css";
 
 // Components
 import TerminalInputOutput from "./teminalInputOutput"
