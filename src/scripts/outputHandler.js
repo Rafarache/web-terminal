@@ -25,7 +25,6 @@ function getDirFiles(dir) {
 
 function isFileInDir (fileName,dir) {
     var newDir = dir.content.find(dir => dir.name === fileName)
-    console.log(newDir,dir)
     if(newDir  === undefined) {
         return false
     } else if (newDir.type === ".dir") {

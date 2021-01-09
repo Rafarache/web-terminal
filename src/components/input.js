@@ -41,7 +41,9 @@ class Input extends React.Component {
     }
 
     handleText(e) {
-        if(e.target.value !== this.state.limit){
+        if(e.target.value.length < this.state.limit.length) {
+            this.setState({text: this.state.limit + " "});
+        } else if(e.target.value !== this.state.limit){
             this.setState({text: e.target.value});
         } else {
             this.setState({text: this.state.text});
