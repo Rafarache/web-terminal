@@ -8,10 +8,19 @@ import "./css/terminalStyle.css";
 // Components
 import TerminalInputOutput from "./teminalInputOutput"
 
+var w = window.innerWidth;
+var h = window.innerHeight;
+
+
 class Terminal extends React.Component {
   state = {
     date: new Date(),
+    visible: true
   };
+
+  closeWindow = () => {
+      this.setState({visible: false})
+  }
 
   onStart = () => {
     this.setState({ activeDrags: ++this.state.activeDrags });
@@ -23,19 +32,23 @@ class Terminal extends React.Component {
 
   render() {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
-     return (
-      <Draggable handle="strong" bounds="body" {...dragHandlers}>
-        <div className="box no-cursor container resize">
-          <strong className="cursor">
-            <div className="bar">
-              desktop - zsh - 80x24
-              <div className="close-button unselectable">X</div>
-            </div>
-          </strong>
-          <TerminalInputOutput/>
-        </div>
-      </Draggable>
-    );
+    if(!this.state.visible) {
+        return(<></>)
+    } else {
+        return (
+         <Draggable handle="strong" bounds="body" defaultPosition={{x: (w/2 - 500/2), y: (h/2 - 400/2)}} {...dragHandlers}>
+           <div className="box no-cursor container resize">
+             <strong className="cursor">
+               <div className="bar">
+                 desktop - zsh - 80x24
+                 <div className="close-button unselectable" onClick={this.closeWindow}>X</div>
+               </div>
+             </strong>
+             <TerminalInputOutput/>
+           </div>
+         </Draggable>
+       );
+    }
   }
 }
 

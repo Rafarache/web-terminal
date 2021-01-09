@@ -8,7 +8,9 @@ import './App.css';
 
 function App() {
   return (
-   <Terminal></Terminal>
+      <div className="app">
+          <Terminal></Terminal>
+      </div>
   );
 }
 
