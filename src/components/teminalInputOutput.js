@@ -13,6 +13,13 @@ import Input from "./input"
 // Scripts
 import commandOutput from "../scripts/outputHandler";
 
+const newDate = new Date()
+const date = newDate.getDate();
+const month = newDate.getMonth();
+const hour = newDate.getHours();
+const minute = newDate.getMinutes();
+const seconds = newDate.getSeconds();
+
 class TerminalInputOutput extends React.Component {
     
     handleAppendCommand = (command) => {
@@ -57,13 +64,6 @@ class TerminalInputOutput extends React.Component {
 
   render(){
     var monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const newDate = new Date()
-    const date = newDate.getDate();
-    const month = newDate.getMonth();
-    const hour = newDate.getHours();
-    const minute = newDate.getMinutes();
-    const seconds = newDate.getSeconds();
-
     return (
         <div className="text-area">
             Last login: {date} {monthsArray[month]} {hour}:{minute}:{seconds} on ttys000

@@ -5,6 +5,9 @@ import Draggable from "react-draggable";
 // Css
 import "./css/terminalStyle.css";
 
+// Assets
+import Folder from "../assets/folder-icon.png"
+
 // Components
 import TerminalInputOutput from "./teminalInputOutput"
 
@@ -40,7 +43,10 @@ class Terminal extends React.Component {
            <div className="box no-cursor container resize">
              <strong className="cursor">
                <div className="bar">
-                 desktop - zsh - 80x24
+                   <div className="terminal-title">
+                       <img src={Folder}/>
+                        root -- zsh -- 80x24
+                   </div>
                  <div className="close-button unselectable" onClick={this.closeWindow}>X</div>
                </div>
              </strong>

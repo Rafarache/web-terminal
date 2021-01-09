@@ -58,3 +58,17 @@
 .close-button:hover {
     color: rgba(0, 0, 0, 0.7);;
 }
+
+.terminal-title {
+    vertical-align: middle;
+    display: inline;
+
+    align-items: center;
+}
+
+.terminal-title > img{
+    position: relative;
+    bottom: -2px;
+    height: 15px;
+    margin-right: 5px;
+}
