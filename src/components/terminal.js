@@ -44,7 +44,7 @@ class Terminal extends React.Component {
              <strong className="cursor">
                <div className="bar">
                    <div className="terminal-title">
-                       <img src={Folder}/>
+                       <img src={Folder} alt="folder"/>
                         root -- zsh -- 80x24
                    </div>
                  <div className="close-button unselectable" onClick={this.closeWindow}>X</div>
