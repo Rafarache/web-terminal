@@ -40,10 +40,20 @@ class TerminalInputOutput extends React.Component {
         var currentFile = this.state.currentFile
         return commandOutput(command, currentFile, this.setCurrentFile)
     }
+
+    getDirFullLocation = (file) => {
+        var dir = file
+        var fullLocation = dir.name
+        while(dir.location !== "root") {
+            fullLocation = dir.location.name + " " + fullLocation
+            dir = dir.location
+        }
+        return fullLocation
+    }
     
     pushInput = () => {
         var newArray = this.state.responses
-        newArray.push(<Input appendCommand={this.handleAppendCommand} dirName={this.state.currentFile.name}/>)
+        newArray.push(<Input appendCommand={this.handleAppendCommand} dirName={this.getDirFullLocation(this.state.currentFile)}/>)
         
         this.setState({responses : newArray})
     }

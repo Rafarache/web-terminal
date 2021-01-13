@@ -16,3 +16,20 @@ body {
 .app {
     height: 100vh;
 }
+
+.instructions {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+
+    font-family: 'Hachi Maru Pop', cursive;
+}
+
+.instructions-table {
+    display: flex;
+    flex-direction: row;
+}
+
+.instructions-table > div {
+    margin-left: 20px;
+}
