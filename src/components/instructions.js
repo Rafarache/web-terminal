@@ -5,13 +5,13 @@ function Instructions() {
             <div className="instructions-table">
                 <div>
                     cd .. 
-                    <br/>cd 
+                    <br/>cd "folder"
                     <br/>ls
                     <br/>fileName.exe
                 </div>
                 <div>
                     move up one directory 
-                    <br/>"folder" go to folder
+                    <br/>enter "folder"
                     <br/>list all files in folder
                     <br/>runs the file
                 </div>
