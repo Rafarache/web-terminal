@@ -1,4 +1,9 @@
+//  Imports
+// Scripts
 import decodeCommand from "./decodeCommand"
+
+// Classes
+import File from "../classes/file"
 
 function isDirContentEmpty(array) {
     if (typeof array !== 'undefined' && array.length > 0) {
@@ -81,6 +86,18 @@ export default function commandOutput(command, file, setCurrentFile) {
                     } else {
                         output = "Cannot enter file which is not directory"
                     }
+                }
+                break
+
+            case 'mkdir':
+                // Has not typed dir name
+                if (decodedCommand.length === 1) {
+                    output = "No directory name typed"
+                
+                // Make dir
+                } else {
+                    var newDir = new File(argument,".dir",[],file)
+                    file.content.push(newDir)
                 }
                 break
 
