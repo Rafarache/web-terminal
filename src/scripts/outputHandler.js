@@ -47,6 +47,14 @@ function getFileInDirContent (fileName,dir) {
     }
 }
 
+function getFileExtension(name) {
+    return name.split(".")[1]
+}
+
+function getFileName(name) {
+    return name.split(".")[0]
+}
+
 export default function commandOutput(command, file, setCurrentFile) {
     var decodedCommand = decodeCommand(command)
     var instruction = decodedCommand[0]
@@ -98,6 +106,20 @@ export default function commandOutput(command, file, setCurrentFile) {
                 } else {
                     var newDir = new File(argument,".dir",[],file)
                     file.content.push(newDir)
+                }
+                break
+
+            case 'touch':
+                // Has not name typed
+                if (decodedCommand.length === 1) {
+                    output = "No name typed"
+                
+                // Make file
+                } else {
+                    var extension = getFileExtension(argument)
+                    var fileName = getFileName(argument)
+                    var newFile = new File(fileName,"." + extension,[],file)
+                    file.content.push(newFile)
                 }
                 break
 
