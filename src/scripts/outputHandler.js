@@ -23,7 +23,13 @@ function getDirFiles(dir) {
         return "Directory with no files"
     } else {
         return dir.content.map((file) => {
-            return<div className="ls-print">{file.type===".dir"?file.name :file.name + file.type}</div>
+            var className = "ls-print"
+            if (file.type!==".dir") {
+                className = className + " blueColor"
+            }
+            return <div className={className}>
+                {file.type===".dir"?file.name :file.name + file.type}
+                </div>
         })
     }
 }
