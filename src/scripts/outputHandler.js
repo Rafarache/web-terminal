@@ -117,9 +117,14 @@ export default function commandOutput(command, file, setCurrentFile) {
                 // Make file
                 } else {
                     var extension = getFileExtension(argument)
-                    var fileName = getFileName(argument)
-                    var newFile = new File(fileName,"." + extension,[],file)
-                    file.content.push(newFile)
+                    if (extension !== undefined) {
+                        extension = "." + extension
+                        var fileName = getFileName(argument)
+                        var newFile = new File(fileName,extension,[],file)
+                        file.content.push(newFile)
+                    } else {
+                        output = "File with no extension"
+                    }
                 }
                 break
 
